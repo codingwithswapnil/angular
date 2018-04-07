@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Posts!</h1>
+        <p class="lead">Rendering posts using service.</p>
+    </div>
+
+    <div class="card border-primary mb-3" *ngFor="let service_post of service_posts; let i = index;">
+        <div class="card-header">#{{i}}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{service_post}}</h4>
+        </div>
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Posts!</h1>
+        <p class="lead">Rendering posts from jsonplaceholder.</p>
+    </div>
+
+    <div class="card border-primary mb-3" *ngFor="let post of posts;">
+        <div class="card-header" (click)="renderCommentsByPost(post.id)" style="cursor: pointer;">#{{post.id}}</div>
+        <div class="card-body">
+          <h4 class="card-title">{{post.title}}</h4>
+          <p class="card-text">{{post.body}}</p>
+        </div>
+        <div *ngFor="let user of users; let i=index">
+            <footer class="blockquote-footer mb-2 ml-2" *ngIf="user.id == post.userId"> Posted by user <cite title="{{user.name}}">{{user.name}}</cite></footer>
+        </div>
+
+        <div class="comments m-4" *ngIf="comments">
+            <span>Comments: </span>
+            <div class="list-group mt-4">
+                <div *ngFor="let comment of comments">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start mt-2"  *ngIf="comment.postId == post.id">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{comment.name}}</h5>
+                            <small>{{comment.email}}</small>
+                        </div>
+                        <small>{{comment.body}}</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="comments m-4" *ngIf="comments">
+            <span>Comments: </span>
+            <ul class="list-group mt-2">
+                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let comment of comments">
+                    <p *ngIf="comment.postId == post.id">
+                        <span class="bol">From: </span><span class="badge badge-primary badge-pill">{{comment.email}}</span> <br />
+                        <span>Name: </span> {{comment.name}} <br />
+                        <span>Comment: </span>{{comment.body}} <br />
+                    </p>
+                </li>
+            </ul>
+        </div> -->
+
+      </div>
+</div>
+
+<!-- <div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Todos!</h1>
+        <p class="lead">Rendering todos from jsonplaceholder.</p>
+    </div>
+
+    <div class="card border-primary mb-3" *ngFor="let todo of todos;">
+        <div class="card-header">Todo #{{todo.id}}</div>
+        <div class="card-body">
+            <h4 class="card-title">{{todo.title}}
+                <span class="card-text fa fa-close pull-right" style="color: #FF0000;" *ngIf="todo.completed == false"></span>
+                <span class="card-text fa fa-check pull-right" style="color: #00FF00;" *ngIf="todo.completed == true"></span>
+            </h4>
+        </div>
+        <div *ngFor="let user of users; let i=index">
+            <footer class="blockquote-footer mb-2 ml-2" *ngIf="user.id == todo.userId"> Todo created by user <cite title="{{user.name}}">{{user.name}}</cite></footer>
+        </div>
+    </div>
+</div> -->

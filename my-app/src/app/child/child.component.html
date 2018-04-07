@@ -1,0 +1,16 @@
+<div class="container jumbotron text-center">
+  <h1 class="text-secondary">
+    This is a child component
+  </h1>
+  <p class="lead text-danger">
+    Data coming from Parent: <strong>{{no}}</strong>
+    <button class="btn btn-primary" (click)="increase($event)">+</button>
+  </p>
+
+  <div>
+    <p *ngFor="let item of items; let i = index">
+      {{item.product}} as ordered <strong>{{item.quantity}}</strong>
+      <button class="btn btn-primary" (click)="increaseProducts($event, i)">+</button>
+    </p>
+  </div>
+</div>

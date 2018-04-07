@@ -1,0 +1,30 @@
+<div class="jumbotron">   
+  <form id="loginForm" #loginForm="ngForm" (ngSubmit)="login(loginForm)" novalidate>
+    <fieldset>
+      <legend>Login</legend>
+      <div class="form-group">
+        <label for="userName">User Name</label>
+        <input type="text" class="form-control" id="userName" name="userName"  placeholder="Enter User Name" [(ngModel)]="user.userName" required #userName="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" [(ngModel)]="user.password" required minlength="6" #password="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+        <div [hidden]="password.pristine || password.valid" class="alert alert-danger">
+            Password should be at least 6 characters long
+        </div>
+      </div> 
+      <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary">Submit</button>
+      OR 
+      <a class="btn btn-primary" routerLink="/register">Click here to register</a>
+    </fieldset>
+  </form>
+
+  <div>&nbsp;</div>
+  <div *ngIf="loginStatus == 1" class="alert alert-success">
+    <p class="text-center">Congrats ! Login Successful.</p>
+  </div>
+
+  <div *ngIf="loginStatus == 0" class="alert alert-danger">
+    <p class="text-center">Sorry ! Credentials invalid.</p>
+  </div>
+</div>

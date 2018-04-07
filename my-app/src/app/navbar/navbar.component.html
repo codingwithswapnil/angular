@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Hello {{this.loginService.loggedInUsername}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="this.loginService.loginStatusByService">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact: true}">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="this.loginService.loginStatusByService">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      </li>
+      <li class="nav-item" *ngIf="!this.loginService.loginStatusByService">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!this.loginService.loginStatusByService">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+      </li>
+      <li class="nav-item" *ngIf="this.loginService.loginStatusByService">
+        <a class="nav-link" (click)="logout()" style="cursor: pointer;">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/child" routerLinkActive="active">Child</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/parent" routerLinkActive="active">Parent</a>
+      </li>
+    </ul>
+  </div>
+</nav>

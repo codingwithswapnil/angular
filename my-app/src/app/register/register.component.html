@@ -1,0 +1,52 @@
+<div class="jumbotron">
+  <h1 class="display-3">Hello!</h1>
+  <p class="lead">This is a simple registration form to collect information from your.</p>
+  <hr class="my-4">
+  <p>Please fill in the details to let us enhance your experience.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#registrationForm" role="button">Go to registration</a>
+  </p>
+
+  <form id="registrationForm" #registerForm="ngForm" (ngSubmit)="register(registerForm)" novalidate>
+    <fieldset>
+      <legend>Sign Up</legend>
+      <div class="form-group">
+        <label for="userName">User Name</label>
+        <input type="text" class="form-control" id="userName" name="userName"  placeholder="Enter User Name" (input)="checkUserNameAvailability()" [(ngModel)]="user.userName" required #userName="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+        <div *ngIf="userAvailable == 0" class="alert alert-danger">
+            User name is not available.
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name"  placeholder="Enter Name" [(ngModel)]="user.name" required #name="ngModel" />
+      </div>
+      <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email"  placeholder="Enter email" [(ngModel)]="user.email" required #email="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+          <div [hidden]="email.pristine || email.valid" class="alert alert-danger">
+            Email shouldn't be empty
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" [(ngModel)]="user.password" required minlength="6" #password="ngModel" [ngModelOptions]="{updateOn: 'change'}" />
+        <div [hidden]="password.pristine || password.valid" class="alert alert-danger">
+            Password should be at least 6 characters long
+        </div>
+      </div> 
+      <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Submit</button>
+      OR 
+      <a class="btn btn-primary" routerLink="/login">Click here to login</a>
+    </fieldset>
+  </form>
+
+  <div>&nbsp;</div>
+  <div *ngIf="registrationStatus == 1" class="alert alert-success">
+    <p class="text-center">Congrats ! Registration Successful.</p>
+  </div>
+
+  <div *ngIf="registrationStatus == 0" class="alert alert-danger">
+    <p class="text-center">Sorry ! Credentials invalid.</p>
+  </div>
+</div>
